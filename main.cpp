@@ -14,9 +14,10 @@ int main(int argc, char* argv[])
 
     string fileName = argv[1];
     string outputFile = "ENCRYPTED" + fileName;
+    int shiftVal = atoi(argv[2]);
     ofstream outFS;
     ifstream inFS;
-    
+
     cout << "Trying to open " << fileName << endl;
 
     inFS.open(fileName);
@@ -52,7 +53,7 @@ int main(int argc, char* argv[])
 
         for (int i = 0; i < currLine.length() && currLine.at(i) != '\0'; i++)
         {
-            currLine.at(i) += 2;
+            currLine.at(i) += shiftVal;
         }
 
         outFS << currLine << endl;
