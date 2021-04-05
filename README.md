@@ -3,6 +3,7 @@ This program will take a regular text file and encrypt it using an offset specif
 
 ## Dependencies
 * g++
+* make
 * Patience for my horrible code
 
 ## Compiling
