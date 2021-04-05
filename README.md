@@ -1,4 +1,4 @@
-# Cpp Caeser Cypher
+# Caeser Cypher
 ---
 
 This program will take a regular text file and encrypt it using an offset specified by the user.
