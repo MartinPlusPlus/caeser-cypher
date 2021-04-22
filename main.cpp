@@ -4,6 +4,7 @@
 using namespace std;
 
 bool CheckArguments(int argc, char* argv[]);
+int OpenFile(ifstream& inputStream, string filename);
 
 int main(int argc, char* argv[])
 {
@@ -20,17 +21,9 @@ int main(int argc, char* argv[])
     ofstream outFS;
     ifstream inFS;
 
-    // Open input file
-    cout << "Trying to open " << fileName << endl;
-    inFS.open(fileName);
-    if (!inFS.is_open())
+    if (OpenFile(inFS, fileName) == 1)
     {
-        cout << "Could not open file" << endl;
         return 1;
-    }
-    else
-    {
-        cout << fileName << " is open" << endl;
     }
 
     // Open output file
@@ -91,4 +84,21 @@ bool CheckArguments(int argc, char* argv[])
     }
 
     return true;
+}
+
+int OpenFile(ifstream& inputStream, string filename)
+{
+	// Open input file
+	cout << "Trying to open " << filename << endl;
+	inputStream.open(filename);
+	if (!inputStream.is_open())
+	{
+		cout << "Could not open file" << endl;
+		return 1;
+	}
+	else
+	{
+		cout << filename << " is open" << endl;
+        return 0;
+	}
 }
