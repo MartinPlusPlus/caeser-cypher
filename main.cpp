@@ -27,11 +27,11 @@ int main(int argc, char* argv[])
     if (fileName.find('.') != string::npos)
     {
         dotIndex = fileName.find('.');
-	extension = fileName.substr(dotIndex);
+        extension = fileName.substr(dotIndex);
     }
     else
     {
-	cout << "WARNING: Your file does not contain an extension, some functionality may be lost" << endl;
+        cout << "WARNING: Your file does not contain an extension, some functionality may be lost" << endl;
     }
 
     // If there is a file extension, create a string containing just the filename
@@ -115,17 +115,17 @@ bool CheckArguments(int argc, char* argv[])
 
 int OpenInputFile(fstream& filestream, string filename)
 {
-	// Open input file
-	cout << "Trying to open " << filename << endl;
-	filestream.open(filename);
-	if (!filestream.is_open())
-	{
-		cout << "Could not open file" << endl;
-		return 1;
-	}
-	else
-	{
-		cout << filename << " is open" << endl;
-                return 0;
-	}
+    // Open input file
+    cout << "Trying to open " << filename << endl;
+    filestream.open(filename);
+    if (!filestream.is_open())
+    {
+        cout << "Could not open file" << endl;
+        return 1;
+    }
+    else
+    {
+        cout << filename << " is open" << endl;
+        return 0;
+    }
 }
