@@ -4,7 +4,7 @@
 using namespace std;
 
 bool CheckArguments(int argc, char* argv[]);
-int OpenFile(ifstream& inputStream, string filename);
+int OpenInputFile(ifstream& inputStream, string filename);
 
 int main(int argc, char* argv[])
 {
@@ -86,7 +86,7 @@ bool CheckArguments(int argc, char* argv[])
     return true;
 }
 
-int OpenFile(ifstream& inputStream, string filename)
+int OpenInputFile(ifstream& inputStream, string filename)
 {
 	// Open input file
 	cout << "Trying to open " << filename << endl;
