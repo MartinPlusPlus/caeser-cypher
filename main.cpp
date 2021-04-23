@@ -4,7 +4,8 @@
 using namespace std;
 
 bool CheckArguments(int argc, char* argv[]);
-int OpenFile(fstream& filestream, string filename);
+int OpenFile(ifstream& filestream, string filename);
+int OpenFile(ofstream& filestream, string filename);
 
 int main(int argc, char* argv[])
 {
@@ -14,8 +15,8 @@ int main(int argc, char* argv[])
     string pureName;
     string extension;
     string outputFile = fileName + "_encrypted";
-    fstream outputStream;
-    fstream inputStream;
+    ofstream outputStream;
+    ifstream inputStream;
 
     // Check for the right amount of arguments
     if (!CheckArguments(argc, argv))
@@ -107,7 +108,24 @@ bool CheckArguments(int argc, char* argv[])
     return true;
 }
 
-int OpenFile(fstream& filestream, string filename)
+int OpenFile(ifstream& filestream, string filename)
+{
+    // Open input file
+    cout << "Trying to open " << filename << endl;
+    filestream.open(filename);
+    if (!filestream.is_open())
+    {
+        cout << "Could not open file" << endl;
+        return 1;
+    }
+    else
+    {
+        cout << filename << " is open" << endl;
+        return 0;
+    }
+}
+
+int OpenFile(ofstream& filestream, string filename)
 {
     // Open input file
     cout << "Trying to open " << filename << endl;
