@@ -4,7 +4,7 @@
 using namespace std;
 
 bool CheckArguments(int argc, char* argv[]);
-int OpenInputFile(fstream& filestream, string filename);
+int OpenFile(fstream& filestream, string filename);
 
 int main(int argc, char* argv[])
 {
@@ -14,8 +14,8 @@ int main(int argc, char* argv[])
     string pureName;
     string extension;
     string outputFile = fileName + "_encrypted";
-    ofstream outFS;
-    fstream fileStream;
+    fstream outputStream;
+    fstream inputStream;
 
     // Check for the right amount of arguments
     if (!CheckArguments(argc, argv))
@@ -47,32 +47,26 @@ int main(int argc, char* argv[])
     outputFile = pureName + "_encrypted" + extension;
 
     // Open file, if it fails, return 1
-    if (OpenInputFile(fileStream, fileName) == 1)
+    if (OpenFile(inputStream, fileName) == 1)
     {
-	cout << "ERROR: Could not read file: " << fileName << endl;
+	    cout << "ERROR: Could not read file: " << fileName << endl;
         return 1;
     }
 
-    // Open output file
-    outFS.open(outputFile);
-    if (!outFS.is_open())
+    if (OpenFile(outputStream, outputFile) == 1)
     {
-        cout << "Could not open file" << endl;
+        cout << "ERROR: Could not create output file: " << outputFile << endl;
         return 1;
-    }
-    else
-    {
-        cout << outputFile << " is open" << endl;
     }
 
     int count = 1;
     string currLine = "";
 
     // Go through each line and encrypt it
-    while (!fileStream.fail() && !outFS.fail())
+    while (!inputStream.fail() && !outputStream.fail())
     {
         cout << "Reading line " << count << endl;
-        getline(fileStream, currLine);
+        getline(inputStream, currLine);
         cout << currLine << endl;
 
         // Shift each char in the line by shiftVal amount
@@ -81,20 +75,20 @@ int main(int argc, char* argv[])
             currLine.at(i) += shiftVal;
         }
 
-        outFS << currLine << endl;
+        outputStream << currLine << endl;
 
         count++;
     }
 
     // See if we are at the end of the file
-    if (fileStream.eof())
+    if (inputStream.eof())
     {
         cout << "End of file reached" << endl;
     }
 
     // Close file streams
-    outFS.close();
-    fileStream.close();
+    outputStream.close();
+    inputStream.close();
 
     return 0;
 }
@@ -113,7 +107,7 @@ bool CheckArguments(int argc, char* argv[])
     return true;
 }
 
-int OpenInputFile(fstream& filestream, string filename)
+int OpenFile(fstream& filestream, string filename)
 {
     // Open input file
     cout << "Trying to open " << filename << endl;
