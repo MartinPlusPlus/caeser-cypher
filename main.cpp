@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
     // Get arguments and create file streams
     string fileName = argv[1];
-    string outputFile = "ENCRYPTED" + fileName;
+    string outputFile = fileName + "_encrypted";
     int shiftVal = atoi(argv[2]);
     ofstream outFS;
     ifstream inFS;
