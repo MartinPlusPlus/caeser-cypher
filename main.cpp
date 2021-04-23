@@ -11,11 +11,11 @@ int main(int argc, char* argv[])
     string fileName = argv[1];
     int shiftVal = atoi(argv[2]);
     int dotIndex;
+    string pureName;
+    string extension;
     string outputFile = fileName + "_encrypted";
     ofstream outFS;
     fstream fileStream;
-    string pureName;
-    string extension;
 
     // Check for the right amount of arguments
     if (!CheckArguments(argc, argv))
