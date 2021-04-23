@@ -9,9 +9,9 @@ int OpenInputFile(fstream& filestream, string filename);
 int main(int argc, char* argv[])
 {
     string fileName = argv[1];
-    int dot;
-    string outputFile = fileName + "_encrypted";
     int shiftVal = atoi(argv[2]);
+    int dotIndex;
+    string outputFile = fileName + "_encrypted";
     ofstream outFS;
     fstream fileStream;
     string pureName;
@@ -26,18 +26,18 @@ int main(int argc, char* argv[])
     // Find start of extension
     if (fileName.find('.') != string::npos)
     {
-        dot = fileName.find('.');
-	extension = fileName.substr(dot);	
-    }    
+        dotIndex = fileName.find('.');
+	extension = fileName.substr(dotIndex);
+    }
     else
     {
 	cout << "WARNING: Your file does not contain an extension, some functionality may be lost" << endl;
     }
-   
-    // If there is a file extension, create a string containing just the filename 
-    if (dot)
+
+    // If there is a file extension, create a string containing just the filename
+    if (dotIndex)
     {
-        pureName = fileName.substr(0, (dot));
+        pureName = fileName.substr(0, (dotIndex));
     }
     else
     {
@@ -45,8 +45,8 @@ int main(int argc, char* argv[])
     }
 
     outputFile = pureName + "_encrypted" + extension;
-   
-    // Open file, if it fails, return 1 
+
+    // Open file, if it fails, return 1
     if (OpenInputFile(fileStream, fileName) == 1)
     {
 	cout << "ERROR: Could not read file: " << fileName << endl;
